@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quote Gen</title>
+
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="web-fonts-with-css/css/fontawesome-all.css" />
+    <script src="https://unpkg.com/react@16.8.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.8.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const QuoteComps = (props) => {
+        return (
+          <>
+            <h1 id="title">Simple Quote Generator - FreeCode Camp</h1>
+
+            <div id="quote-box">
+              <span id="author">
+                {props.author}
+                <h1 id="author-title">{props.author}</h1>
+              </span>
+
+              <span id="text">
+                
+                <p id="quotebox-text">{props.quote}</p>
+              </span>
+
+              <button onClick={props.sendQuote} id="new-quote">New Quote</button>
+
+              <a  id="tweet-quote" href={`https://twitter.com/intent/tweet?text=${props.quote} ${props.author}`} target='_blank' title="Post this quote on twitter!">
+                {" "}
+                Tweet Quote
+              </a>
+            </div>
+          </>
+        );
+      };
+
+      class QuoteApp extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            author: " ",
+            quote: " ",
+          };
+          this.sendQuote = this.sendQuote.bind(this);
+          this.getQuote = this.getQuote.bind(this);
+        }
+
+        componentDidMount() {
+
+          this.getQuote();
+          
+        }
+
+        getQuote() {
+            let currentComponent = this; // cached this so that it is available inside fetch
+            var url = `https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json`;
+
+            fetch(url)
+              .then((response) => {
+                return response.json();
+              })
+              .then((response) => {
+
+                if (response != "") {
+                  let quoteNum = Math.floor(
+                    Math.random() * response.quotes.length
+                  ); //quote number
+                  let randomQuote = response.quotes[quoteNum]; //actual quote
+
+                  console.log("Request successful", randomQuote);
+
+                  currentComponent.setState({
+                    quote: randomQuote["quote"],
+                    author: randomQuote["author"],
+                  });
+
+                } else {
+                  currentComponent.setState({
+                    quote: "unknown",
+                    author: "unknown",
+                  });
+                }
+              })
+              .catch(function (err) {
+                console.log("Fetch Error :-S", err);
+              });
+          }
+
+        sendQuote (e) {
+          e.preventDefault();
+          this.getQuote();
+        }
+
+        render() {
+          const { quote, author, sendQuote } = this.state
+          return <QuoteComps quote={quote} author={author} sendQuote={this.sendQuote} />;
+        }
+      }
+
+      ReactDOM.render(<QuoteApp />, document.getElementById("root"));
+    </script>
+
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  </body>
+</html>
