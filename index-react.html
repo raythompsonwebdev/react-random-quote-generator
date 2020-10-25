@@ -7,38 +7,61 @@
     <title>Quote Gen</title>
 
     <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="web-fonts-with-css/css/fontawesome-all.css" />
+    <link rel="stylesheet" href="./animate.css" />
+    <link rel="stylesheet" href="./web-fonts-with-css/css/fontawesome-all.css" />
+    
     <script src="https://unpkg.com/react@16.8.2/umd/react.development.js"></script>
+
     <script src="https://unpkg.com/react-dom@16.8.2/umd/react-dom.development.js"></script>
+
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-transition-group@2.2/dist/react-transition-group.js"></script>
+    <script>window.ReactTransitionGroup || document.write('<script crossorigin src="../../../node_modules/react-transition-group/dist/react-transition-group.js"><\/script>')</script>
   </head>
   <body>
     <div id="root"></div>
 
     <script type="text/babel">
+
       const QuoteComps = (props) => {
         return (
           <>
-            <h1 id="title">Simple Quote Generator - FreeCode Camp</h1>
-
+            <h1 id="title">Simple React Quote Generator</h1>
+            
             <div id="quote-box">
-              <span id="author">
-                {props.author}
-                <h1 id="author-title">{props.author}</h1>
-              </span>
-
-              <span id="text">
-                
-                <p id="quotebox-text">{props.quote}</p>
-              </span>
-
+                <ReactTransitionGroup.TransitionGroup>
+                   
+                    <ReactTransitionGroup.CSSTransition
+                        key={props.author}
+                        in={true}
+                        classNames={{
+                        enter: "animated",
+                        enterActive: "zoomIn",
+                        exit: "animated",
+                        exitActive: "my-done-exit",
+                        
+                      }}
+                      
+                      timeout={2000}>
+                      <div id="wrapper">  
+                        <h1 id="author">{props.author}</h1>
+                        <p id="text">{props.quote}</p>
+                      </div>    
+                        
+                    </ReactTransitionGroup.CSSTransition>
+                  
+              </ReactTransitionGroup.TransitionGroup>
               <button onClick={props.sendQuote} id="new-quote">New Quote</button>
 
-              <a  id="tweet-quote" href={`https://twitter.com/intent/tweet?text=${props.quote} ${props.author}`} target='_blank' title="Post this quote on twitter!">
-                {" "}
-                Tweet Quote
-              </a>
+                <a  id="tweet-quote" href={`https://twitter.com/intent/tweet?text=${props.quote} ${props.author}`} target='_blank' title="Post this quote on twitter!">
+                  {" "}
+                  Tweet Quote
+                </a>
             </div>
+            
+                
+              
+          
           </>
         );
       };
@@ -83,12 +106,7 @@
                     author: randomQuote["author"],
                   });
 
-                } else {
-                  currentComponent.setState({
-                    quote: "unknown",
-                    author: "unknown",
-                  });
-                }
+                } 
               })
               .catch(function (err) {
                 console.log("Fetch Error :-S", err);
@@ -107,7 +125,10 @@
       }
 
       ReactDOM.render(<QuoteApp />, document.getElementById("root"));
+    
     </script>
+
+    <!-- <script src="./quote-react.js"></script> -->
 
     <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
   </body>
