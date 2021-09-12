@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quote Gen</title>
+
+    <link rel="stylesheet" href="app.css" />
+
+        
+  </head>
+  <body>
+
+    <h1 id="title">Simple React Quote Generator</h1>
+    
+    <div id="quote-box">
+      <div id="wrapper">  
+          <h1 id="author"></h1>
+          <p id="text"></p>
+      </div>            
+      <button onClick="" id="new-quote">New Quote</button>
+
+      <a  id="tweet-quote" href="https://twitter.com/intent/tweet?text=${props.quote} ${props.author}" target="_blank" title="Post this quote on twitter!">Tweet Quote</a>
+    </div>         
+   
+    <script src="/quote-es6.js"></script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+  </body>
+</html>
