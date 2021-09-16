@@ -4,73 +4,64 @@ let randomQuote;
 let randomAuthor; 
 let myVar;  
 let myVar2;  
+let timeAnimation = 500;
+let counter = 0;
 
-const getQuotes = () =>{
-  fetch(
-    'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json',
-    {          
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    }
-  ).then(
-    response => {
-      if(response.status !== 200){
-        return response;
+const authorboxTitle = document.querySelector("#quote-box #wrapper h1#author");
+const quoteBoxText = document.querySelector("#quote-box #wrapper p#text");
+
+async function getQuotes () {
+
+  let url = `https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json`;
+  await fetch(
+    url,
+    {
+      method: 'GET',
+      headers:{
+        'Accept': 'application/json'
       }
     }
-  ).then(response => {
-      console.log('Request successful', response);          
-      if(response != ''){
-        randomQuote = response.quoteText;
-        randomAuthor = response.quoteAuthor; 
-        for(let i=0; i<=randomAuthor.length; i++){
-            let timeAnimation = 500;
-            const authorboxTitle2 = document.querySelector("#authorbox h1#authorbox-title");
-            const authorboxTitle = document.querySelector("#quoteDisplay #authorbox #authorbox-title");
-            authorboxTitle.innerHTML = " " ;                
-            myVar = setInterval(fadeOut, timeAnimation);                
-            function fadeOut() {  
-              authorboxTitle.innerHTML = randomAuthor;
-              //authorboxTitle.fadeIn(timeAnimation);
+    )
+  .then(
+    response => {      
+        //console.log('Request successful', response.json());
+        return response.json();      
+    }
+  ).then(data => {
+      //console.log('Request successful', data); 
+               
+      if(data != ''){
 
-              if(randomAuthor){
-              authorboxTitle2.innerHTML = `Said by - ${randomAuthor}`; 
-              }else{ 
-              authorboxTitle2.innerHTML = `Unknown`;
-              }
-            }                                
-          //   $("#quoteDisplay #authorbox #authorbox-title").fadeOut(timeAnimation, function(){
-          //       //s$("#quoteDisplay #authorbox #authorbox-title").html('');
-          //       $("#quoteDisplay #authorbox #authorbox-title").html(randomAuthor);
-          //       $("#quoteDisplay #authorbox #authorbox-title").fadeIn(timeAnimation);
-          //       if(randomAuthor){
-          //           $("#authorbox h1#authorbox-title").text('Said by - ' + randomAuthor)    
-          //       }else{    
-          //           $("#authorbox h1#authorbox-title").text('Unknown')
-          //       }
-          //  });
-        } 
-        for(var i=0; i<=randomQuote.length; i++){
+        randomQuote = data.quotes;
+        
+        //console.log(randomQuote)
+        
+        quoteBoxText.innerHTML ='';
+        authorboxTitle.innerHTML = "";        
 
-          let timeAnimation = 500;
-          const quoteBoxText = document.querySelector("#quoteDisplay #quotebox p#quotebox-text");
-          quoteBoxText.innerHTML ='';
-          myVar2 = setInterval(fadeOut2, timeAnimation);
-          const fadeOut2 = () => {
-              authorboxTitle2.innerHTML = '';
-              quoteBoxText.innerHTML = randomQuote;
-              quoteBoxText.append('<i class="fa fa-quote-right" aria-hidden="true"></i>')
-              quoteBoxText.prepend('<i class="fa fa-quote-left" aria-hidden="true"></i>');
-              //$("#quoteDisplay #quotebox p#quotebox-text").fadeIn(timeAnimation);
-                
-          };                          
-        }           
-        return false;  
+        randomQuote.forEach((element,index,array) =>{
+
+          //set a random index
+          let random = Math.floor(Math.random()*array.length);
+          let timeAnimation = 500; 
+                     ;                       
+          // myVar = setInterval(fadeOut, timeAnimation); 
+
+          // function fadeOut() {  
+             quoteBoxText.innerHTML = array[random].quote;
+          //   authorboxTitle.fadeIn(timeAnimation);
+          // }
+          
+          
+          authorboxTitle.innerHTML = array[random].author;
+
+
+        }) 
+    
+        
+        
       }else{
-        document.querySelector("#quoteDisplay").innerHTML = 'Nothing to show';
+        document.querySelector("#quote-box #wrapper p#text").innerHTML = 'Nothing to show';
       }
     }
   ).catch((err) => {
@@ -78,16 +69,19 @@ const getQuotes = () =>{
   });               
 }
 
-//quote window
+getQuotes();
+
+// //quote window
 document.querySelector("#new-quote").addEventListener('click', (event) =>{                    
   event.preventDefault;
+  
   getQuotes();
 });
 
 //tweet function 
-document.querySelector('a#tweetz').addEventListener('click', () => {
-  window.location = `https://twitter.com/intent/tweet?text=${randomQuote}`;
-});
+// document.querySelector('a#tweetz').addEventListener('click', () => {
+//   window.location = `https://twitter.com/intent/tweet?text=${randomQuote}`;
+// });
 
         
 
