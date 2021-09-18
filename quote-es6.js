@@ -1,14 +1,14 @@
 
 
 let randomQuote;
-let randomAuthor; 
-let myVar;  
-let myVar2;  
-let timeAnimation = 500;
-let counter = 0;
+const authorboxTitle = document.querySelector("#wrapper #quote-box h1#author");
+const quoteBoxText = document.querySelector("#wrapper #quote-box p#text");  
+const quoteBox = document.querySelector("#wrapper #quote-box"); 
+const tweetButton = document.getElementById("tweet-quote")
 
-const authorboxTitle = document.querySelector("#quote-box #wrapper h1#author");
-const quoteBoxText = document.querySelector("#quote-box #wrapper p#text");
+authorboxTitle.innerHTML = "Click new quote button to see a new quote ";
+quoteBoxText.innerHTML = ' ';
+ 
 
 async function getQuotes () {
 
@@ -21,47 +21,40 @@ async function getQuotes () {
         'Accept': 'application/json'
       }
     }
-    )
+  )
   .then(
     response => {      
         //console.log('Request successful', response.json());
         return response.json();      
     }
   ).then(data => {
-      //console.log('Request successful', data); 
                
       if(data != ''){
-
-        randomQuote = data.quotes;
-        
-        //console.log(randomQuote)
-        
-        quoteBoxText.innerHTML ='';
-        authorboxTitle.innerHTML = "";        
+        randomQuote = data.quotes;  
 
         randomQuote.forEach((element,index,array) =>{
-
           //set a random index
           let random = Math.floor(Math.random()*array.length);
-          let timeAnimation = 500; 
-                     ;                       
-          // myVar = setInterval(fadeOut, timeAnimation); 
 
-          // function fadeOut() {  
-             quoteBoxText.innerHTML = array[random].quote;
-          //   authorboxTitle.fadeIn(timeAnimation);
-          // }
-          
-          
+          //display author name
           authorboxTitle.innerHTML = array[random].author;
 
+          //display quote
+          quoteBoxText.innerHTML = array[random].quote;
 
-        }) 
-    
-        
+          //set href attribute to add quote to twitter post
+          tweetButton.setAttribute("href", `https://twitter.com/intent/tweet?text=${array[random].quote}`)
+
+          //if author and quote showing add show class
+          if(quoteBox){
+            quoteBox.classList.add("show");
+          }
+               
+        });
         
       }else{
-        document.querySelector("#quote-box #wrapper p#text").innerHTML = 'Nothing to show';
+        quoteBoxText.innerHTML = 'Sorry ! Nothing To Show.';
+        authorboxTitle.innerHTML = 'Sorry ! Nothing To Show.';       
       }
     }
   ).catch((err) => {
@@ -69,19 +62,15 @@ async function getQuotes () {
   });               
 }
 
-getQuotes();
-
 // //quote window
-document.querySelector("#new-quote").addEventListener('click', (event) =>{                    
+document.querySelector("#wrapper #new-quote").addEventListener('click', (event) =>{                    
   event.preventDefault;
-  
+  //remove show class if added to element
+  quoteBox.classList.remove("show");
+  //call function
   getQuotes();
 });
 
-//tweet function 
-// document.querySelector('a#tweetz').addEventListener('click', () => {
-//   window.location = `https://twitter.com/intent/tweet?text=${randomQuote}`;
-// });
 
         
 

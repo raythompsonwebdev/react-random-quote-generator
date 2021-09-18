@@ -12,7 +12,12 @@ h1#title {
   text-align: center;
 }
 
-#quote-box{
+div{
+  width:100%;
+}
+
+/*wrapper*/
+#wrapper{
   padding:0.5em;
   position: fixed;
   top: 50%;
@@ -38,64 +43,76 @@ h1#title {
 
 }
 
-div{
-  width:100%;
-}
-/*wrapper*/
-#wrapper {
+#wrapper #quote-box {
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   width:100%;
-  height: 250px;  
+  min-height: 350px;  
   color: #000;
   margin: auto;
   background-color: #fff;
 
 }
 
+@keyframes example {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(0.25);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* .tabcontent {
+  opacity: 0;
+  transition: opacity 500ms;
+} */
+
+.show{
+  opacity: 1;
+  animation-name: example;
+  animation-duration: 0.5s;
+}
+
 /*author*/
-#wrapper #author {
-  width: auto;
+#quote-box #author {
+  width: 100%;
   display: block;
   height: auto;
-  line-height: 1.5em;
+  line-height: 70px;
   text-align: center;
   background-color:#000;
   color:#fff;
+  font-size:2em; 
+  padding:0;
+  margin:0;
 
+  transition: opacity 500ms;
 }
 
 /*text*/
-#wrapper #text {
+#quote-box #text {
   width: 96%;
   display: block;
   height: auto;
-  line-height: 0.9em;
+  line-height: 1.8em;
   text-align: center;
-  margin: auto;
-  
-}
+  margin: auto; 
+  font-size:1.5em; 
 
-/*quotation marks*/
-#wrapper #text:before{
-    content:'"';
-    font-size:1.5em;
-    display:inline-block;
-    margin:0.5em;
-
-}
-
-#wrapper #text:after{
-    content:'"';
-    font-size:1.5em;
-    display:inline-block;
-    margin:0.5em;
+  transition: opacity 500ms;
 }
 
 
 /*button*/
-#quote-box #new-quote {
+#wrapper button#new-quote {
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
@@ -106,17 +123,17 @@ div{
   outline: none;
   font-size: 1.5em;
   transition: all 1s ease-in-out 1s;
-  -webkit-transition: all 1s ease-in-out 1s;
-  -moz-transition: all 1s ease-in-out 1s;
+  -webkit-transition: all 1s ease-in-out 0.2s;
+  -moz-transition: all 1s ease-in-out 0.2s;
 }
 /*button hover*/
-#quote-box #new-quote:hover {
+#wrapper button#new-quote:hover {
   background-color: rgb(104, 80, 8);
   cursor: pointer;
 }
 
 /*tweet button*/
-#quote-box a#tweet-quote {
+#wrapper a#tweet-quote {
   text-decoration: none;
   -webkit-flex: 1 0 auto;
   -ms-flex: 1 0 auto;
@@ -133,16 +150,12 @@ div{
 }
 
 /*tweet hover*/
-#quote-box a#tweet-quote:hover {
+#wrapper a#tweet-quote:hover {
   background-color: rgb(104, 80, 8);
   cursor: pointer;
 }
 
-.my-done-exit {
-  opacity: 0;
-  display:none;
-  position:absolute;
-}
+
 
 
 
