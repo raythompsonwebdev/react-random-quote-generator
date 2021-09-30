@@ -23,8 +23,8 @@ async function getQuotes () {
     }
   )
   .then(
-    response => {      
-        //console.log('Request successful', response.json());
+    response => {     
+
         return response.json();      
     }
   ).then(data => {
@@ -35,21 +35,18 @@ async function getQuotes () {
         randomQuote.forEach((element,index,array) =>{
           //set a random index
           let random = Math.floor(Math.random()*array.length);
-
           //display author name
           authorboxTitle.innerHTML = array[random].author;
-
           //display quote
           quoteBoxText.innerHTML = array[random].quote;
-
           //set href attribute to add quote to twitter post
-          tweetButton.setAttribute("href", `https://twitter.com/intent/tweet?text=${array[random].quote}`)
+          tweetButton.setAttribute("href", `https://twitter.com/intent/tweet?text=${array[random].quote}`);
 
           //if author and quote showing add show class
           if(quoteBox){
             quoteBox.classList.add("show");
           }
-               
+
         });
         
       }else{

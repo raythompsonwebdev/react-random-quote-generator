@@ -92,11 +92,24 @@ div{
   color:#fff;
   font-size:2em; 
   padding:0;
-  margin:0;
-
+  margin:0 0 1em 0;
   transition: opacity 500ms;
 }
+/*quotation marks*/
+#quote-box #text:before{
+  content:'"';
+  font-size:1.5em;
+  display:inline-block;
+  margin:0.5em;
 
+}
+
+#quote-box #text:after{
+  content:'"';
+  font-size:1.5em;
+  display:inline-block;
+  margin:0.5em;
+}
 /*text*/
 #quote-box #text {
   width: 96%;
@@ -106,7 +119,6 @@ div{
   text-align: center;
   margin: auto; 
   font-size:1.5em; 
-
   transition: opacity 500ms;
 }
 
