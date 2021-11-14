@@ -1,12 +1,13 @@
 
 
 let randomQuote;
-const authorboxTitle = document.querySelector("#wrapper #quote-box h1#author");
+const authorboxTitle = document.querySelector("#wrapper #quote-box h2#author");
 const quoteBoxText = document.querySelector("#wrapper #quote-box p#text");  
 const quoteBox = document.querySelector("#wrapper #quote-box"); 
 const tweetButton = document.getElementById("tweet-quote")
 
-authorboxTitle.innerHTML = "Click new quote button to see a new quote ";
+authorboxTitle.innerHTML = "Click new quote button ";
+
 quoteBoxText.innerHTML = ' ';
  
 
@@ -38,7 +39,7 @@ async function getQuotes () {
           //display author name
           authorboxTitle.innerHTML = array[random].author;
           //display quote
-          quoteBoxText.innerHTML = array[random].quote;
+          quoteBoxText.innerHTML = `" ${array[random].quote} "`;
           //set href attribute to add quote to twitter post
           tweetButton.setAttribute("href", `https://twitter.com/intent/tweet?text=${array[random].quote}`);
 

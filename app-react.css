@@ -1,0 +1,360 @@
+body {
+    background-color: rgb(228, 197, 106);
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands", Arial, Helvetica,
+      sans-serif;
+    
+  }
+
+  div{
+    width:100%;
+  }
+  
+    
+  #quote-box{
+    padding:0.5em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: auto;
+    font-size: 1em;
+    color: #000;
+    line-height: 1.6em;
+    margin: auto;
+    background-color: #fff;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+  
+  }
+   
+  #quote-box h1#title {
+    display: block;
+    line-height: 50px;
+    text-align: center;
+    width:100%;
+    margin:0;
+    font-size:1.2em;
+  }
+  
+  #wrapper {
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    width:100%;
+    height: auto;  
+    color: #000;
+    margin: auto;
+    background-color: #fff;
+  
+  }
+  
+  /*author*/
+  #wrapper #author {
+    width: auto;
+    display: block;
+    height: auto;
+    line-height: 1.5em;
+    line-height:100px;
+    text-align: center;
+    background-color:#000;
+    color:#fff;
+  
+  }
+  
+  /*text*/
+  #wrapper #text {
+    width: 98%;
+    display: block;
+    height: auto;
+    line-height: 1.6em;
+    text-align: center;
+    margin: auto;
+    padding-bottom:1em;
+    
+  }
+      
+  /*button*/
+  #quote-box #new-quote {
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    background-color: #c90;
+    width: 50%;
+    line-height: 80px;
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+    transition: all 1s ease-in-out 1s;
+    -webkit-transition: all 1s ease-in-out 1s;
+    -moz-transition: all 1s ease-in-out 1s;
+  }
+  /*button hover*/
+  #quote-box #new-quote:hover {
+    background-color: rgb(104, 80, 8);
+    cursor: pointer;
+  }
+  
+  /*tweet button*/
+  #quote-box a#tweet-quote {
+    text-decoration: none;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    line-height: 80px;
+    width: 50%;
+    background-color: #c90;
+    text-align: center;
+    color: #fff;
+    font-size: 1.2em;
+    transition: all 1s ease-in-out 1s;
+    -webkit-transition: all 1s ease-in-out 1s;
+    -moz-transition: all 1s ease-in-out 1s;
+  }
+  
+  /*tweet hover*/
+  #quote-box a#tweet-quote:hover {
+    background-color: rgb(104, 80, 8);
+    cursor: pointer;
+  }
+  
+  .my-done-exit {
+    opacity: 0;
+    display:none;
+    position:absolute;
+  }
+
+  @media only screen and (min-width: 90em){
+
+    #quote-box{
+      width: 50%;    
+    }
+     
+    #quote-box h1#title {
+      line-height: 60px;
+      font-size:1.55em;
+    }
+    
+    #wrapper {
+      width:100%;    
+    }
+    
+    /*author*/
+    #wrapper #author {
+      line-height: 1.6em;
+      line-height:100px;    
+    }
+    
+    /*text*/
+    #wrapper #text {
+      width: 98%;
+      line-height: 1.6em;
+      font-size:1.1em;
+      
+    }
+        
+    /*button*/
+    #quote-box #new-quote {
+      width: 50%;
+      line-height: 80px;
+      font-size: 1.2em;
+    }
+       
+    /*tweet button*/
+    #quote-box a#tweet-quote {
+      line-height: 80px;
+      width: 50%;
+      font-size: 1.2em;
+
+    }
+    
+
+  }
+
+  @media only screen and (min-width: 64em) and (max-width: 1439px){
+
+    #quote-box{
+      width: 50%;    
+    }
+     
+    #quote-box h1#title {
+      line-height: 60px;
+      font-size:1.55em;
+    }
+    
+    #wrapper {
+      width:100%;    
+    }
+    
+    /*author*/
+    #wrapper #author {
+      line-height: 1.6em;
+      line-height:100px;    
+    }
+    
+    /*text*/
+    #wrapper #text {
+      width: 98%;
+      line-height: 1.6em;
+      font-size:1.1em;
+      
+    }
+        
+    /*button*/
+    #quote-box #new-quote {
+      width: 50%;
+      line-height: 80px;
+      font-size: 1.2em;
+    }
+       
+    /*tweet button*/
+    #quote-box a#tweet-quote {
+      line-height: 80px;
+      width: 50%;
+      font-size: 1.2em;
+
+    }
+    
+
+  }
+
+  @media only screen and (min-width: 46em) and (max-width: 1023px){
+
+    #quote-box{
+      width: 60%;    
+    }
+     
+    #quote-box h1#title {
+      line-height: 60px;
+      font-size:1.45em;
+    }
+    
+    #wrapper {
+      width:100%;    
+    }
+    
+    /*author*/
+    #wrapper #author {
+      line-height: 1.6em;
+      line-height:100px;    
+    }
+    
+    /*text*/
+    #wrapper #text {
+      width: 98%;
+      line-height: 1.6em;
+      font-size:1.1em;
+      
+    }
+        
+    /*button*/
+    #quote-box #new-quote {
+      width: 50%;
+      line-height: 80px;
+      font-size: 1.2em;
+    }
+       
+    /*tweet button*/
+    #quote-box a#tweet-quote {
+      line-height: 80px;
+      width: 50%;
+      font-size: 1.2em;
+
+    }
+    
+
+  }
+
+  @media only screen and (min-width: 37.5em) and (max-width: 735px){
+
+    #quote-box{
+      width: 70%;    
+    }
+     
+    #quote-box h1#title {
+      line-height: 50px;
+      font-size:1.45em;
+    }
+    
+    #wrapper {
+      width:100%;    
+    }
+    
+    /*author*/
+    #wrapper #author {
+      line-height: 1.5em;
+      line-height:100px;    
+    }
+    
+    /*text*/
+    #wrapper #text {
+      width: 98%;
+      line-height: 1.6em;
+      
+    }
+        
+    /*button*/
+    #quote-box #new-quote {
+      width: 50%;
+      line-height: 80px;
+      font-size: 1.2em;
+    }
+       
+    /*tweet button*/
+    #quote-box a#tweet-quote {
+      line-height: 80px;
+      width: 50%;
+      font-size: 1.2em;
+
+    }
+    
+
+  }
+
+  @media only screen and (min-width: 22.5em) and (max-width: 599px){
+
+    #quote-box{
+      width: 80%;    
+    }
+     
+    #quote-box h1#title {
+      line-height: 50px;
+      font-size:1.3em;
+    }
+    
+    #wrapper {
+      width:100%;    
+    }
+    
+    /*author*/
+    #wrapper #author {
+      line-height: 1.5em;
+      line-height:100px;    
+    }
+    
+    /*text*/
+    #wrapper #text {
+      width: 98%;
+      line-height: 1.6em;
+      
+    }
+        
+    /*button*/
+    #quote-box #new-quote {
+      width: 50%;
+      line-height: 80px;
+      font-size: 1.2em;
+    }
+       
+    /*tweet button*/
+    #quote-box a#tweet-quote {
+      line-height: 80px;
+      width: 50%;
+      font-size: 1.2em;
+
+    }
+    
+
+  }

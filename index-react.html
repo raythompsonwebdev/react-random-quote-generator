@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Quote Gen</title>
+    <title>React Random Quote Generator</title>
 
-    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="app-react.css" />
     <link rel="stylesheet" href="./animate.css" />
     <link rel="stylesheet" href="./web-fonts-with-css/css/fontawesome-all.css" />
     
@@ -25,10 +25,9 @@
 
       const QuoteComps = (props) => {
         return (
-          <>
-            <h1 id="title">Simple React Quote Generator</h1>
-            
-            <div id="quote-box">
+
+          <section id="quote-box">
+              <h1 id="title">React Quote Generator</h1>
                 <ReactTransitionGroup.TransitionGroup>
                    
                     <ReactTransitionGroup.CSSTransition
@@ -45,7 +44,7 @@
                       timeout={2000}>
                       <div id="wrapper">  
                         <h1 id="author">{props.author}</h1>
-                        <p id="text">{props.quote}</p>
+                        <p id="text">" {props.quote} "</p>
                       </div>    
                         
                     </ReactTransitionGroup.CSSTransition>
@@ -57,12 +56,8 @@
                   {" "}
                   Tweet Quote
                 </a>
-            </div>
-            
-                
-              
-          
-          </>
+            </section>
+                        
         );
       };
 
@@ -72,21 +67,9 @@
           author: " ",
           quote: " ",
         }
-
-        // constructor(props) {
-        //   super(props);
-        //   this.state = {
-        //     author: " ",
-        //     quote: " ",
-        //   };
-        //   //this.sendQuote = this.sendQuote.bind(this);
-        //   //this.getQuote = this.getQuote.bind(this);
-        // }
-
+        
         componentDidMount() {
-
-          this.getQuote();
-          
+          this.getQuote();          
         }
 
         getQuote = () => {
@@ -98,20 +81,16 @@
                 return response.json();
               })
               .then((response) => {
-
                 if (response != "") {
                   let quoteNum = Math.floor(
                     Math.random() * response.quotes.length
                   ); //quote number
                   let randomQuote = response.quotes[quoteNum]; //actual quote
-
-                  console.log("Request successful", randomQuote);
-
+                  //console.log("Request successful", randomQuote);
                   this.setState({
                     quote: randomQuote["quote"],
                     author: randomQuote["author"],
                   });
-
                 } 
               })
               .catch(function (err) {
@@ -136,6 +115,6 @@
 
     <!-- <script src="./quote-react.js"></script> -->
 
-    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
   </body>
 </html>
