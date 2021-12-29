@@ -4,33 +4,117 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Quote Gen</title>
+    <title>React Random Quote Generator</title>
 
-    <link rel="stylesheet" href="app.css" />
-        
+    <link rel="stylesheet" href="app-react.css" />
+    <link rel="stylesheet" href="./animate.css" />
+    <link rel="stylesheet" href="./web-fonts-with-css/css/fontawesome-all.css" />
+    
+    <script src="https://unpkg.com/react@16.8.2/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16.8.2/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-transition-group@2.2/dist/react-transition-group.js"></script>
+    <script>window.ReactTransitionGroup || document.write('<script crossorigin src="../../../node_modules/react-transition-group/dist/react-transition-group.js"><\/script>')</script>
   </head>
   <body>
-    
-      <div id="wrapper">
-        <h1 id="title">Simple Javascript Quote Generator</h1> 
+    <div id="root"></div>
 
-        <div id="quote-box">
-          <h2 id="author"></h1>
-          <p id="text"></p>
-        </div> 
+    <script type="text/babel">
 
-        <button id="new-quote">New Quote</button>
+      const QuoteComps = (props) => {
+        return (
 
-        <a  id="tweet-quote" target="_blank" title="Post this quote on twitter!">Tweet Quote</a>
+          <section id="quote-box">
+              <h1 id="title">React Quote Generator</h1>
+                <ReactTransitionGroup.TransitionGroup>
+                   
+                    <ReactTransitionGroup.CSSTransition
+                        key={props.author}
+                        in={true}
+                        classNames={{
+                        enter: "animated",
+                        enterActive: "zoomIn",
+                        exit: "animated",
+                        exitActive: "my-done-exit",
+                        
+                      }}
+                      
+                      timeout={2000}>
+                      <div id="wrapper">  
+                        <h1 id="author">{props.author}</h1>
+                        <p id="text">" {props.quote} "</p>
+                      </div>    
+                        
+                    </ReactTransitionGroup.CSSTransition>
+                  
+              </ReactTransitionGroup.TransitionGroup>
+              <button onClick={props.sendQuote} id="new-quote">New Quote</button>
 
-      </div>
+                <a  id="tweet-quote" href={`https://twitter.com/intent/tweet?text=${props.quote} ${props.author}`} target='_blank' title="Post this quote on twitter!">
+                  {" "}
+                  Tweet Quote
+                </a>
+            </section>
+                        
+        );
+      };
+
+      class QuoteApp extends React.Component {
+
+        state = {
+          author: " ",
+          quote: " ",
+        }
         
-      
-              
-               
-   
-    <script src="/quote-es6.js"></script>
-    <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
+        componentDidMount() {
+          this.getQuote();          
+        }
 
+        getQuote = () => {
+            //let currentComponent = this; // cached this so that it is available inside fetch or use arrow function
+            var url = `https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json`;
+
+            fetch(url)
+              .then((response) => {
+                return response.json();
+              })
+              .then((response) => {
+                if (response != "") {
+                  let quoteNum = Math.floor(
+                    Math.random() * response.quotes.length
+                  ); //quote number
+                  let randomQuote = response.quotes[quoteNum]; //actual quote
+                  //console.log("Request successful", randomQuote);
+                  this.setState({
+                    quote: randomQuote["quote"],
+                    author: randomQuote["author"],
+                  });
+                } 
+              })
+              .catch(function (err) {
+                console.log("Fetch Error :-S", err);
+              });
+          }
+
+        sendQuote = (e) => {
+          e.preventDefault();
+          this.getQuote();
+        }
+
+        render() {
+          const { quote, author, sendQuote } = this.state
+          return <QuoteComps quote={quote} author={author} sendQuote={this.sendQuote} />;
+        }
+      }
+
+      ReactDOM.render(<QuoteApp />, document.getElementById("root"));
+    
+    </script>
+
+    <!-- <script src="./quote-react.js"></script> -->
+
+    <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
   </body>
 </html>
